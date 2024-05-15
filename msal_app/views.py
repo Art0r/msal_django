@@ -18,12 +18,12 @@ def index(request: HttpRequest):
 def login(request: HttpRequest):
 
     app = ConfidentialClientApplication(
-        MSAL_CONFIG.get('CLIENT_ID'),
-        authority=MSAL_CONFIG.get('AUTHORITY'),
-        client_credential=MSAL_CONFIG.get('SECRET'),
+        MSAL_CONFIG['CLIENT_ID'],
+        authority=MSAL_CONFIG['AUTHORITY'],
+        client_credential=MSAL_CONFIG['SECRET'],
     )
 
-    auth_url = app.get_authorization_request_url(MSAL_CONFIG.get('SCOPE'))
+    auth_url = app.get_authorization_request_url(MSAL_CONFIG['SCOPE'])
 
     return redirect(auth_url)
 
@@ -32,14 +32,14 @@ def auth_callback(request: HttpRequest):
     code = request.GET.get('code')
 
     app = ConfidentialClientApplication(
-        MSAL_CONFIG.get('CLIENT_ID'),
-        authority=MSAL_CONFIG.get('AUTHORITY'),
-        client_credential=MSAL_CONFIG.get('SECRET'),
+        MSAL_CONFIG['CLIENT_ID'],
+        authority=MSAL_CONFIG['AUTHORITY'],
+        client_credential=MSAL_CONFIG['SECRET'],
     )
 
     result = app.acquire_token_by_authorization_code(
         code,
-        scopes=MSAL_CONFIG.get('SCOPE'),
+        scopes=MSAL_CONFIG['SCOPE'],
         redirect_uri='http://localhost:8000/auth/callback',
     )
 
