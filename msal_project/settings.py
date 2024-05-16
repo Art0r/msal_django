@@ -131,3 +131,7 @@ MSAL_CONFIG = {
     'SECRET': os.environ.get('MSAL_SECRET'),
     'SCOPE': '' if os.environ.get('MSAL_SCOPE') is None else os.environ.get('MSAL_SCOPE').split(' ')
 }
+
+AUTH_USER_MODEL = 'msal_app.CustomUser'
+
+LOGIN_URL = 'login'
